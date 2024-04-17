@@ -33,26 +33,14 @@ class DioService {
     }
   }
 
-  /// This method sends a `GET` request to the [endpoint] and returns the
-  /// **decoded** response.
-  ///
-  /// Any errors encountered during the request are caught and a custom
-  /// [NetworkException] is thrown.
-  ///
-  /// [queryParams] holds any query parameters for the request.
-  ///
-  /// [cancelToken] is used to cancel the request pre-maturely. If null,
-  /// the **default** [cancelToken] inside [DioService] is used.
-  ///
-  /// [options] are special instructions that can be merged with the request.
   Future<JSON> get({
-    required String endpoint,
+    required String path,
     JSON? queryParams,
     Options? options,
     CancelToken? cancelToken,
   }) async {
     final response = await _dio.get<JSON>(
-      endpoint,
+      path,
       queryParameters: queryParams,
       options: options,
       cancelToken: cancelToken ?? _cancelToken,
@@ -60,26 +48,14 @@ class DioService {
     return response.data as JSON;
   }
 
-  /// This method sends a `POST` request to the [endpoint] and returns the
-  /// **decoded** response.
-  ///
-  /// Any errors encountered during the request are caught and a custom
-  /// [NetworkException] is thrown.
-  ///
-  /// The [data] contains body for the request.
-  ///
-  /// [cancelToken] is used to cancel the request pre-maturely. If null,
-  /// the **default** [cancelToken] inside [DioService] is used.
-  ///
-  /// [options] are special instructions that can be merged with the request.
   Future<JSON> post({
-    required String endpoint,
+    required String path,
     JSON? data,
     Options? options,
     CancelToken? cancelToken,
   }) async {
     final response = await _dio.post<JSON>(
-      endpoint,
+      path,
       data: data,
       options: options,
       cancelToken: cancelToken ?? _cancelToken,
@@ -100,13 +76,13 @@ class DioService {
   ///
   /// [options] are special instructions that can be merged with the request.
   Future<JSON> patch({
-    required String endpoint,
+    required String path,
     JSON? data,
     Options? options,
     CancelToken? cancelToken,
   }) async {
     final response = await _dio.put<JSON>(
-      endpoint,
+      path,
       data: data,
       options: options,
       cancelToken: cancelToken ?? _cancelToken,

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
@@ -36,11 +34,11 @@ void main() {
           Device.iphone11,
         ])
         ..addScenario(
-          widget: MyApp(),
+          widget: const MyApp(),
           name: 'default page',
         )
         ..addScenario(
-          widget: MyApp(),
+          widget: const MyApp(),
           name: 'tap once',
           onCreate: (scenarioWidgetKey) async {
             final finder = find.descendant(
@@ -52,7 +50,7 @@ void main() {
           },
         )
         ..addScenario(
-          widget: MyApp(),
+          widget: const MyApp(),
           name: 'tap five times',
           onCreate: (scenarioWidgetKey) async {
             final finder = find.descendant(
