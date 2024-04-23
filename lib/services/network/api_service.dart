@@ -47,7 +47,11 @@ class ApiService implements ApiInterface {
     );
     return ApiBaseResponse.fromJson(
       response,
-      (json) => (json as List<JSON>).map(dataItemConverter).toList(),
+      (json) => (json as List)
+          .map(
+            (e) => dataItemConverter(e as JSON),
+          )
+          .toList(),
     );
   }
 
@@ -68,7 +72,7 @@ class ApiService implements ApiInterface {
       {required String path,
       JSON? queryParams,
       CancelToken? cancelToken,
-      required T Function(JSON responseBody) paginationItemConverter}) {
+      required T Function(JSON itemJson) paginationItemConverter}) {
     return getData(
       path: path,
       queryParams: queryParams,

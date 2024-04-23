@@ -3,6 +3,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'home_article_list_item.freezed.dart';
 part 'home_article_list_item.g.dart';
 
+/// 首页文章列表
+/// https://www.wanandroid.com/article/list/0/json
 @freezed
 class HomeArticleListItem with _$HomeArticleListItem {
   const factory HomeArticleListItem({

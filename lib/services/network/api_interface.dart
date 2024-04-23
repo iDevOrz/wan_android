@@ -16,14 +16,14 @@ abstract interface class ApiInterface {
     required String path,
     JSON? queryParams,
     CancelToken? cancelToken,
-    required T Function(JSON responseBody) dataItemConverter,
+    required T Function(JSON dataItemJson) dataItemConverter,
   });
 
   Future<ApiBaseResponse<BasePaginationData<T>>> getPaginationData<T>({
     required String path,
     JSON? queryParams,
     CancelToken? cancelToken,
-    required T Function(JSON responseBody) paginationItemConverter,
+    required T Function(JSON itemJson) paginationItemConverter,
   });
 
   Future<ApiBaseResponse<T>> postData<T>({

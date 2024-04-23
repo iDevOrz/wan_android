@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wan_android/common/widgets/async_value_widget.dart';
 import 'package:wan_android/feature/home/data/home_article_list_item.dart';
+import 'package:wan_android/feature/home/data/home_banner_item.dart';
 import 'package:wan_android/feature/home/presentation/home_controller.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -10,12 +12,25 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: AsyncValueWidget(
-        value: ref.watch(homeControllerProvider),
-        data: (data) => _listViewBuilder(
-          context,
-          data: data.datas,
-        ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          AspectRatio(
+            aspectRatio: 900 / 500,
+            child: AsyncValueWidget(
+              value: ref.watch(homeBannerListProvider),
+              data: (data) => _homeBannerBuilder(context, data: data),
+            ),
+          ),
+          Expanded(
+              child: AsyncValueWidget(
+            value: ref.watch(homeControllerProvider),
+            data: (data) => _listViewBuilder(
+              context,
+              data: data.datas,
+            ),
+          ))
+        ],
       ),
     );
   }
@@ -48,5 +63,16 @@ class HomeScreen extends ConsumerWidget {
         );
       },
     );
+  }
+
+  Widget _homeBannerBuilder(BuildContext context,
+      {required List<HomeBannerItem> data}) {
+    if (data.isEmpty) {
+      return const Text("暂无数据", textAlign: TextAlign.center);
+    }
+    return PageView.builder(itemBuilder: (ct, index) {
+      final itemData = data[index % data.length];
+      return CachedNetworkImage(imageUrl: itemData.imagePath);
+    });
   }
 }
