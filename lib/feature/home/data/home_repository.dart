@@ -40,7 +40,7 @@ class HomeRepository {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 HomeRepository homeRepository(HomeRepositoryRef ref) {
   return HomeRepository(apiService: ref.watch(apiServiceProvider));
 }

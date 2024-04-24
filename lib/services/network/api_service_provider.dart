@@ -11,7 +11,7 @@ const _baseUrl = String.fromEnvironment(
   'BASE_URL',
   defaultValue: 'https://www.wanandroid.com',
 );
-@riverpod
+@Riverpod(keepAlive: true)
 ApiInterface apiService(ApiServiceRef ref) {
   return ApiService(
     DioService(

@@ -6,7 +6,7 @@ import 'package:wan_android/services/network/data/base_pagination_data.dart';
 
 part 'home_controller.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class HomeController extends _$HomeController {
   @override
   FutureOr<BasePaginationData<HomeArticleListItem>> build() async {
@@ -22,7 +22,7 @@ class HomeController extends _$HomeController {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<List<HomeBannerItem>> homeBannerList(HomeBannerListRef ref) async {
   final response = await ref.watch(homeRepositoryProvider).getHomeBannerList();
   return response.data;

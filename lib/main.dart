@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wan_android/feature/home/presentation/home_screen.dart';
+import 'package:go_router/go_router.dart';
+import 'package:wan_android/routers/go_router_builder.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -12,14 +13,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MaterialApp.router(
+      routerConfig: GoRouter(
+        initialLocation: "/home",
+        routes: $appRoutes,
+        navigatorKey: rootNavigatorKey,
       ),
-      home: const HomeScreen(),
     );
   }
 }
