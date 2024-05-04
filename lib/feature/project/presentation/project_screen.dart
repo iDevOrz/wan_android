@@ -18,12 +18,21 @@ class ProjectScreen extends ConsumerWidget {
               appBar: AppBar(
                 backgroundColor: Theme.of(context).primaryColor,
                 title: TabBar(
+                  labelColor: Colors.white,
+                  unselectedLabelColor: Colors.white70,
+                  indicator: BoxDecoration(
+                      borderRadius: BorderRadius.circular(46), // Creates border
+                      color: Colors.blueAccent),
+                  indicatorPadding: const EdgeInsets.symmetric(vertical: 10),
                   padding: const EdgeInsets.all(12),
                   tabs: tree
-                      .map((e) => Text(
-                            e.name,
-                            style: const TextStyle(color: Colors.white),
-                          ))
+                      .map(
+                        (e) => Tab(
+                            child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 23),
+                          child: Text(e.name),
+                        )),
+                      )
                       .toList(),
                   isScrollable: true,
                   tabAlignment: TabAlignment.start,

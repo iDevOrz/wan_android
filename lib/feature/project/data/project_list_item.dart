@@ -31,7 +31,7 @@ class ProjectListItem with _$ProjectListItem {
     required int publishTime,
     required int realSuperChapterId,
     required int selfVisible,
-    required int shareDate,
+    int? shareDate,
     required String shareUser,
     required int superChapterId,
     required String superChapterName,

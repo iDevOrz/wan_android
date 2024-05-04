@@ -12,9 +12,15 @@ class AsyncValueWidget<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return value.when(
       data: data,
-      error: (e, st) => Center(child: ErrorMessageWidget(e.toString())),
+      error: (e, st) => _errorBuilder(context, error: e, stackTrace: st),
       loading: () => const Center(child: CircularProgressIndicator()),
     );
+  }
+
+  Widget _errorBuilder(BuildContext context,
+      {required Object error, required StackTrace stackTrace}) {
+    debugPrintStack(label: error.toString(), stackTrace: stackTrace);
+    return Center(child: ErrorMessageWidget(error.toString()));
   }
 }
 
