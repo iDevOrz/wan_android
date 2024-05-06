@@ -43,3 +43,6 @@ app.*.map.json
 /android/app/release
 **.freezed.dart
 **.g.dart
+
+# FVM Version Cache
+.fvm/

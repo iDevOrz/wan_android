@@ -7,18 +7,34 @@ void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  /// https://github.com/flutter/flutter/issues/113323#issuecomment-1277744429
+  late final GoRouter _router;
+
+  @override
+  void initState() {
+    _router = GoRouter(
+      initialLocation: "/home",
+      routes: $appRoutes,
+      navigatorKey: rootNavigatorKey,
+    );
+    super.initState();
+  }
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerConfig: GoRouter(
-        initialLocation: "/home",
-        routes: $appRoutes,
-        navigatorKey: rootNavigatorKey,
-      ),
+      routeInformationParser: _router.routeInformationParser,
+      routeInformationProvider: _router.routeInformationProvider,
+      routerDelegate: _router.routerDelegate,
     );
   }
 }
