@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wan_android/common/widgets/wa_tabbar.dart';
+import 'package:wan_android/feature/square/presentation/knowledge_system_view.dart';
+import 'package:wan_android/feature/square/presentation/question_list_view.dart';
 import 'package:wan_android/feature/square/presentation/square_list_view.dart';
 
 class SquareScreen extends StatelessWidget {
@@ -18,10 +20,11 @@ class SquareScreen extends StatelessWidget {
         ),
         body: TabBarView(children: [
           const SquareListView(),
+          const QuestionListView(),
+          const KnowledgeSystemView(),
           ..._tabLabelList
-              .getRange(1, _tabLabelList.length)
+              .getRange(3, _tabLabelList.length)
               .map((e) => Center(child: Text(e)))
-              .toList()
         ]),
       ),
     );
