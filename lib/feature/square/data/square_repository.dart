@@ -1,10 +1,12 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wan_android/feature/project/data/project_list_item.dart';
-import 'package:wan_android/feature/square/data/knowledge_system_tree.dart';
+import 'package:wan_android/feature/square/data/site_navigation_item.dart';
 import 'package:wan_android/services/network/api_interface.dart';
 import 'package:wan_android/services/network/api_service_provider.dart';
 import 'package:wan_android/services/network/data/api_base_response.dart';
 import 'package:wan_android/services/network/data/base_pagination_data.dart';
+
+import 'knowledge_system_tree.dart';
 
 part 'square_repository.g.dart';
 
@@ -39,6 +41,15 @@ class SquareRepository {
     return _apiService.getListData(
       path: "/tree/json",
       dataItemConverter: KnowledgeSystemTree.fromJson,
+    );
+  }
+
+  // 导航数据
+  // https://www.wanandroid.com/navi/json
+  Future<ApiBaseResponse<List<SiteNavigationItem>>> getSiteNavigationData() {
+    return _apiService.getListData(
+      path: "/navi/json",
+      dataItemConverter: SiteNavigationItem.fromJson,
     );
   }
 }
