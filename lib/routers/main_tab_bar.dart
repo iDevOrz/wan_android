@@ -40,6 +40,12 @@ class _MainTabBarState extends State<MainTabBar> {
       routerPath: '/square',
     ),
     const MainTabBarItem(
+      icon: Icon(Icons.wechat),
+      activeIcon: Icon(Icons.wechat),
+      label: "公众号",
+      routerPath: '/mediaPlatform',
+    ),
+    const MainTabBarItem(
       icon: Icon(Icons.person),
       activeIcon: Icon(Icons.person),
       label: "我的",

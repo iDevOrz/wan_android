@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wan_android/feature/home/presentation/home_screen.dart';
+import 'package:wan_android/feature/media_platform/presentation/media_platform_screen.dart';
 import 'package:wan_android/feature/profile/presentation/profile_screen.dart';
 import 'package:wan_android/feature/project/presentation/project_screen.dart';
 import 'package:wan_android/feature/square/presentation/square_screen.dart';
@@ -17,6 +18,7 @@ final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>();
     TypedGoRoute<HomeRouteData>(path: '/home'),
     TypedGoRoute<ProjectRouteData>(path: '/project'),
     TypedGoRoute<SquareRouteData>(path: '/square'),
+    TypedGoRoute<MediaPlatformRouteData>(path: '/mediaPlatform'),
     TypedGoRoute<ProfileRouteData>(path: '/profile'),
   ],
 )
@@ -58,6 +60,16 @@ class SquareRouteData extends GoRouteData {
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     return const NoTransitionPage(child: SquareScreen());
+  }
+}
+
+@immutable
+class MediaPlatformRouteData extends GoRouteData {
+  const MediaPlatformRouteData();
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return const NoTransitionPage(child: MediaPlatformScreen());
   }
 }
 
