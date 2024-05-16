@@ -4,6 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wan_android/services/network/api_interface.dart';
 import 'package:wan_android/services/network/api_service.dart';
 import 'package:wan_android/services/network/dio_service.dart';
+import 'package:wan_android/services/network/error_code_interceptor.dart';
 
 part 'api_service_provider.g.dart';
 
@@ -22,7 +23,8 @@ ApiInterface apiService(ApiServiceRef ref) {
           LogInterceptor(
             responseBody: !kReleaseMode,
             requestBody: !kReleaseMode,
-          )
+          ),
+          ErrorCodeInterceptor()
         ]),
   );
 }

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart' show CancelToken;
 import 'package:wan_android/services/network/data/base_pagination_data.dart';
+import 'package:wan_android/services/network/network_exception.dart';
 
 import 'data/api_base_response.dart';
 import 'api_interface.dart';
@@ -25,13 +26,17 @@ class ApiService implements ApiInterface {
       JSON? queryParams,
       CancelToken? cancelToken,
       required T Function(JSON responseData) converter}) async {
-    final response = await _dioService.get(
-      path: path,
-      queryParams: queryParams,
-      cancelToken: cancelToken,
-    );
-    return ApiBaseResponse.fromJson(
-        response, (json) => converter.call(json as JSON));
+    try {
+      final response = await _dioService.get(
+        path: path,
+        queryParams: queryParams,
+        cancelToken: cancelToken,
+      );
+      return ApiBaseResponse.fromJson(
+          response, (json) => converter.call(json as JSON));
+    } on Exception catch (error) {
+      throw NetworkException.getDioException(error);
+    }
   }
 
   @override
@@ -40,19 +45,23 @@ class ApiService implements ApiInterface {
       JSON? queryParams,
       CancelToken? cancelToken,
       required T Function(JSON dataItemJson) dataItemConverter}) async {
-    final response = await _dioService.get(
-      path: path,
-      queryParams: queryParams,
-      cancelToken: cancelToken,
-    );
-    return ApiBaseResponse.fromJson(
-      response,
-      (json) => (json as List)
-          .map(
-            (e) => dataItemConverter(e as JSON),
-          )
-          .toList(),
-    );
+    try {
+      final response = await _dioService.get(
+        path: path,
+        queryParams: queryParams,
+        cancelToken: cancelToken,
+      );
+      return ApiBaseResponse.fromJson(
+        response,
+        (json) => (json as List)
+            .map(
+              (e) => dataItemConverter(e as JSON),
+            )
+            .toList(),
+      );
+    } on Exception catch (error) {
+      throw NetworkException.getDioException(error);
+    }
   }
 
   @override
@@ -61,10 +70,14 @@ class ApiService implements ApiInterface {
       required JSON data,
       CancelToken? cancelToken,
       required T Function(JSON response) converter}) async {
-    final response = await _dioService.post(
-        path: path, data: data, cancelToken: cancelToken);
-    return ApiBaseResponse.fromJson(
-        response, (json) => converter.call(json as JSON));
+    try {
+      final response = await _dioService.post(
+          path: path, data: data, cancelToken: cancelToken);
+      return ApiBaseResponse.fromJson(
+          response, (json) => converter.call(json as JSON));
+    } on Exception catch (error) {
+      throw NetworkException.getDioException(error);
+    }
   }
 
   @override
@@ -73,14 +86,18 @@ class ApiService implements ApiInterface {
       JSON? queryParams,
       CancelToken? cancelToken,
       required T Function(JSON itemJson) paginationItemConverter}) {
-    return getData(
-      path: path,
-      queryParams: queryParams,
-      cancelToken: cancelToken,
-      converter: (json) => BasePaginationData.fromJson(
-        json,
-        (json) => paginationItemConverter.call(json as JSON),
-      ),
-    );
+    try {
+      return getData(
+        path: path,
+        queryParams: queryParams,
+        cancelToken: cancelToken,
+        converter: (json) => BasePaginationData.fromJson(
+          json,
+          (json) => paginationItemConverter.call(json as JSON),
+        ),
+      );
+    } on Exception catch (error) {
+      throw NetworkException.getDioException(error);
+    }
   }
 }

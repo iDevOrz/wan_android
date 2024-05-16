@@ -117,5 +117,3 @@ class DioService {
     return response.data as JSON;
   }
 }
-
-class NetworkException {}
