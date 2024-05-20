@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:wan_android/routers/go_router_builder.dart';
 import 'package:wan_android/services/network/network_exception.dart';
 
 class ErrorHandler {
@@ -18,6 +19,13 @@ class ErrorHandler {
         useRootNavigator: true,
         builder: (_) => AlertDialog(
           content: Text(errorMsg ?? ""),
+          actions: [
+            FilledButton(
+                onPressed: () {
+                  const LoginRouteData().replace(context);
+                },
+                child: const Text("去登录"))
+          ],
         ),
       ),
       orElse: () => debugPrint(

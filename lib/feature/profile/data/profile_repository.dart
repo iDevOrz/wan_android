@@ -19,7 +19,7 @@ class ProfileRepository {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 ProfileRepository profileRepository(ProfileRepositoryRef ref) {
   return ProfileRepository(ref.watch(apiServiceProvider));
 }

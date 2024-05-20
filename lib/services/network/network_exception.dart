@@ -55,10 +55,10 @@ class NetworkException with _$NetworkException {
         case DioExceptionType.connectionError:
           return const NetworkException.connectionErrorException();
         case DioExceptionType.unknown:
-          final errorResponse = error.error as ErrorResponse?;
 
           /// errorCode = -1001 代表登录失效，需要重新登录。
-          if (errorResponse != null) {
+          if (error.error is ErrorResponse) {
+            final errorResponse = error.error as ErrorResponse;
             if (errorResponse.errorCode == -1001) {
               return NetworkException.needLogin(
                   errorMsg: errorResponse.errorMsg);
