@@ -17,6 +17,14 @@ class ProfileRepository {
       converter: UserInfo.fromJson,
     );
   }
+
+  Future<ApiBaseResponse> login(
+      {required String username, required String password}) {
+    return _apiService.postData(
+        path: "/user/login",
+        data: {"username": username, "password": password},
+        converter: (_) => null);
+  }
 }
 
 @Riverpod(keepAlive: true)

@@ -28,6 +28,11 @@ class ErrorHandler {
           ],
         ),
       ),
+      apiException: (int errorCode, String? errorMsg) {
+        final errorSnackBar =
+            SnackBar(content: Text("${errorMsg ?? "未知异常"} code $errorCode"));
+        ScaffoldMessenger.of(context).showSnackBar(errorSnackBar);
+      },
       orElse: () => debugPrint(
         networkException.toString(),
       ),
