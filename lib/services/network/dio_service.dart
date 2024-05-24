@@ -56,7 +56,7 @@ class DioService {
   }) async {
     final response = await _dio.post<JSON>(
       path,
-      data: data,
+      data: data != null ? FormData.fromMap(data) : null,
       options: options,
       cancelToken: cancelToken ?? _cancelToken,
     );

@@ -17,18 +17,25 @@ class ProfileScreen extends ConsumerWidget {
     });
 
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            userInfo.maybeWhen(
-                data: (value) => value.userInfo.nickname, orElse: () => ""),
-          ),
-          Text(
-            userInfo.maybeWhen(
-                data: (value) => value.userInfo.email, orElse: () => ""),
-          )
-        ],
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 60),
+            const CircleAvatar(
+              radius: 80,
+              child: FlutterLogo(size: 80),
+            ),
+            Text(
+              userInfo.maybeWhen(
+                  data: (value) => value.userInfo.nickname, orElse: () => ""),
+            ),
+            Text(
+              userInfo.maybeWhen(
+                  data: (value) => value.userInfo.email, orElse: () => ""),
+            )
+          ],
+        ),
       ),
     );
   }

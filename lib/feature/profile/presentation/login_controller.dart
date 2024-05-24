@@ -6,9 +6,7 @@ part 'login_controller.g.dart';
 @riverpod
 class LoginController extends _$LoginController {
   @override
-  FutureOr<void> build() async {
-    return null;
-  }
+  FutureOr<void> build() {}
 
   Future<AsyncValue<void>> login(
       {required String username, required String password}) async {

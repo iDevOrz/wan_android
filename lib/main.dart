@@ -3,7 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wan_android/routers/go_router_builder.dart';
 
-void main() {
+import 'services/storage/storage_config.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await StorageConfig.init();
   runApp(const ProviderScope(child: MyApp()));
 }
 

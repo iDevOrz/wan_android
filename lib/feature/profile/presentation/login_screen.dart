@@ -17,9 +17,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     ref.listen(loginControllerProvider, (previous, next) {
-      debugPrint("listen $previous $next");
       if (next.hasError) {
         ErrorHandler().call(context, error: next.error!);
+      } else if (next.hasValue) {
+        Navigator.of(context).pop();
       }
     });
 

@@ -17,20 +17,23 @@ class ErrorHandler {
       needLogin: (errorMsg) => showDialog(
         context: context,
         useRootNavigator: true,
-        builder: (_) => AlertDialog(
+        builder: (ct) => AlertDialog(
           content: Text(errorMsg ?? ""),
           actions: [
             FilledButton(
                 onPressed: () {
-                  const LoginRouteData().replace(context);
+                  Navigator.of(ct).pop();
+                  const LoginRouteData().push(context);
                 },
                 child: const Text("去登录"))
           ],
         ),
       ),
       apiException: (int errorCode, String? errorMsg) {
-        final errorSnackBar =
-            SnackBar(content: Text("${errorMsg ?? "未知异常"} code $errorCode"));
+        final errorSnackBar = SnackBar(
+            behavior: SnackBarBehavior.floating,
+            margin: MediaQuery.of(context).viewInsets,
+            content: Text("${errorMsg ?? "未知异常"} code $errorCode"));
         ScaffoldMessenger.of(context).showSnackBar(errorSnackBar);
       },
       orElse: () => debugPrint(
