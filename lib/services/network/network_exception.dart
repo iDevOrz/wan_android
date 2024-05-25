@@ -11,7 +11,7 @@ class NetworkException with _$NetworkException {
 
   const factory NetworkException.formatException() = _FormatException;
 
-  const factory NetworkException.unrecognizedException() =
+  const factory NetworkException.unrecognizedException(Exception error) =
       _UnrecognizedException;
 
   const factory NetworkException.apiException({
@@ -68,13 +68,13 @@ class NetworkException with _$NetworkException {
                   errorMsg: errorResponse.errorMsg);
             }
           } else {
-            return const NetworkException.unrecognizedException();
+            return NetworkException.unrecognizedException(error);
           }
       }
     } else if (error is FormatException) {
       return const NetworkException.formatException();
     } else {
-      return const NetworkException.unrecognizedException();
+      return NetworkException.unrecognizedException(error);
     }
   }
 }
