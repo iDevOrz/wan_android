@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wan_android/feature/home/presentation/home_screen.dart';
 import 'package:wan_android/feature/media_platform/presentation/media_platform_screen.dart';
-import 'package:wan_android/feature/profile/presentation/coin_detail_screen.dart';
-import 'package:wan_android/feature/profile/presentation/login_screen.dart';
-import 'package:wan_android/feature/profile/presentation/profile_screen.dart';
+import 'package:wan_android/feature/profile/presentation/coin_detail/coin_detail_screen.dart';
+import 'package:wan_android/feature/profile/presentation/login/login_screen.dart';
+import 'package:wan_android/feature/profile/presentation/profile/profile_screen.dart';
 import 'package:wan_android/feature/project/presentation/project_screen.dart';
 import 'package:wan_android/feature/square/presentation/square_screen.dart';
 

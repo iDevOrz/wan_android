@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wan_android/feature/profile/presentation/profile_controller.dart';
+import 'package:wan_android/common/widgets/async_value_widget.dart';
+import 'package:wan_android/feature/profile/presentation/coin_detail/coin_detail_controller.dart';
+import 'package:wan_android/feature/profile/presentation/coin_detail/coin_detail_item_view.dart';
+import 'package:wan_android/feature/profile/presentation/profile/profile_controller.dart';
 
 class CoinDetailScreen extends ConsumerWidget {
   const CoinDetailScreen({super.key});
@@ -36,7 +39,21 @@ class CoinDetailScreen extends ConsumerWidget {
             )
           ];
         },
-        body: ListView(),
+        body: Consumer(
+          builder: (context, ref, child) {
+            return AsyncValueWidget(
+                value: ref.watch(coinDetailControllerProvider),
+                data: (data) {
+                  return ListView.separated(
+                    itemCount: data.length,
+                    itemBuilder: (ct, index) =>
+                        CoinDetailItemView(data: data[index]),
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const Divider(),
+                  );
+                });
+          },
+        ),
       ),
     );
   }

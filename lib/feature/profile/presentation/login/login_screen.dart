@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wan_android/feature/profile/presentation/login_controller.dart';
+import 'package:wan_android/feature/profile/presentation/login/login_controller.dart';
 import 'package:wan_android/services/error_handler.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {

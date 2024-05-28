@@ -4,6 +4,7 @@ import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:talker_dio_logger/talker_dio_logger_interceptor.dart';
 import 'package:talker_dio_logger/talker_dio_logger_settings.dart';
+import 'package:wan_android/main.dart';
 import 'package:wan_android/services/network/api_interface.dart';
 import 'package:wan_android/services/network/api_service.dart';
 import 'package:wan_android/services/network/dio_service.dart';
@@ -26,6 +27,7 @@ ApiInterface apiService(ApiServiceRef ref) {
         ),
         interceptors: [
           TalkerDioLogger(
+            talker: talker,
             settings: const TalkerDioLoggerSettings(
               printRequestHeaders: true,
               printResponseHeaders: true,

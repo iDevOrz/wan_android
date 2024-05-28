@@ -2,7 +2,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wan_android/services/network/api_interface.dart';
 import 'package:wan_android/services/network/api_service_provider.dart';
 import 'package:wan_android/services/network/data/api_base_response.dart';
+import 'package:wan_android/services/network/data/base_pagination_data.dart';
 
+import 'coin_item.dart';
 import 'user_info.dart';
 
 part 'profile_repository.g.dart';
@@ -24,6 +26,13 @@ class ProfileRepository {
         path: "/user/login",
         data: {"username": username, "password": password},
         converter: (_) => null);
+  }
+
+  Future<ApiBaseResponse<BasePaginationData<CoinItem>>> getCoinDetailList() {
+    return _apiService.getPaginationData(
+      path: "/lg/coin/list/1/json",
+      paginationItemConverter: CoinItem.fromJson,
+    );
   }
 }
 

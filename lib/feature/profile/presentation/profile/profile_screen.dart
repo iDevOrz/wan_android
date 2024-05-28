@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wan_android/feature/profile/presentation/profile_controller.dart';
+import 'package:wan_android/feature/profile/presentation/profile/profile_controller.dart';
 import 'package:wan_android/routers/go_router_builder.dart';
 import 'package:wan_android/services/error_handler.dart';
 
@@ -21,7 +20,6 @@ class ProfileScreen extends ConsumerWidget {
     return Scaffold(
       body: SafeArea(
         child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
           children: [
             const SizedBox(height: 60),
             const CircleAvatar(
@@ -109,7 +107,7 @@ class ProfileScreen extends ConsumerWidget {
       child: InkWell(
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12),
+          padding: const EdgeInsets.all(12),
           child: Row(
             children: [
               icon,
