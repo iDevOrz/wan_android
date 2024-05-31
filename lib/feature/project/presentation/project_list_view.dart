@@ -1,3 +1,4 @@
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wan_android/common/widgets/async_value_widget.dart';
@@ -11,13 +12,20 @@ class ProjectListView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return AsyncValueWidget(
-        value: ref.watch(projectListControllerProvider.call(cid: cid)),
-        data: (data) {
-          return ListView.builder(
-            itemCount: data.length,
-            itemBuilder: (ct, index) => ProjectListItemView(data: data[index]),
-          );
-        });
+    final notifier = ref.read(projectListProvider(cid).notifier);
+    final asyncData = ref.watch(projectListControllerProvider(cid: cid));
+    return EasyRefresh(
+      onRefresh: notifier.onRefresh,
+      onLoad: asyncData.hasValue ? notifier.onLoad : null,
+      child: AsyncValueWidget(
+          value: asyncData,
+          data: (data) {
+            return ListView.builder(
+              itemCount: data.datas.length,
+              itemBuilder: (ct, index) =>
+                  ProjectListItemView(data: data.datas[index]),
+            );
+          }),
+    );
   }
 }

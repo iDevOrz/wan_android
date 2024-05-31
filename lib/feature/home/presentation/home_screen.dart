@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wan_android/common/widgets/async_value_widget.dart';
@@ -11,26 +12,33 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final homeNotifier = ref.read(homeControllerProvider.notifier);
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          AspectRatio(
-            aspectRatio: 900 / 500,
-            child: AsyncValueWidget(
-              value: ref.watch(homeBannerListProvider),
-              data: (data) => _homeBannerBuilder(context, data: data),
-            ),
-          ),
-          Expanded(
-              child: AsyncValueWidget(
+      body: EasyRefresh(
+        onRefresh: homeNotifier.onRefresh,
+        onLoad: homeNotifier.onLoad,
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return [
+              SliverToBoxAdapter(
+                child: AspectRatio(
+                  aspectRatio: 900 / 500,
+                  child: AsyncValueWidget(
+                    value: ref.watch(homeBannerListProvider),
+                    data: (data) => _homeBannerBuilder(context, data: data),
+                  ),
+                ),
+              )
+            ];
+          },
+          body: AsyncValueWidget(
             value: ref.watch(homeControllerProvider),
             data: (data) => _listViewBuilder(
               context,
               data: data.datas,
             ),
-          ))
-        ],
+          ),
+        ),
       ),
     );
   }
