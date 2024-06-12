@@ -6,6 +6,7 @@ import 'package:wan_android/common/widgets/async_value_widget.dart';
 import 'package:wan_android/feature/home/data/home_article_list_item.dart';
 import 'package:wan_android/feature/home/data/home_banner_item.dart';
 import 'package:wan_android/feature/home/presentation/home_controller.dart';
+import 'package:wan_android/feature/home/presentation/home_list_view.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -48,28 +49,7 @@ class HomeScreen extends ConsumerWidget {
     return ListView.builder(
       padding: const EdgeInsets.all(8),
       itemCount: data.length,
-      itemBuilder: (_, index) {
-        final itemData = data[index];
-        return Card(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  itemData.title,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  itemData.superChapterName,
-                  style: Theme.of(context).textTheme.labelSmall,
-                )
-              ],
-            ),
-          ),
-        );
-      },
+      itemBuilder: (_, index) => HomeListView(data: data[index]),
     );
   }
 

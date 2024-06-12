@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wan_android/common/widgets/webview_screen.dart';
 import 'package:wan_android/feature/home/presentation/home_screen.dart';
 import 'package:wan_android/feature/media_platform/presentation/media_platform_screen.dart';
 import 'package:wan_android/feature/profile/presentation/coin_detail/coin_detail_screen.dart';
@@ -104,5 +105,17 @@ class LoginRouteData extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const LoginScreen();
+  }
+}
+
+@TypedGoRoute<WebviewRouteData>(path: '/detail')
+class WebviewRouteData extends GoRouteData {
+  const WebviewRouteData({required this.link});
+
+  final String link;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return WebviewScreen(link: link);
   }
 }
