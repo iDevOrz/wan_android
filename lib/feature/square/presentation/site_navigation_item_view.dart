@@ -8,29 +8,37 @@ class SiteNavigationItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              data.name,
-              maxLines: 2,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(height: 4),
-            Wrap(
-              spacing: 8,
-              children: data.articles
-                  .map((e) =>
-                      FilledButton(onPressed: () {}, child: Text(e.title)))
-                  .toList(),
-            )
-          ],
+    return InkWell(
+      onTap: () => _onTap(context),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                data.name,
+                maxLines: 2,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 4),
+              Wrap(
+                spacing: 8,
+                children: data.articles
+                    .map((e) =>
+                        FilledButton(onPressed: () {}, child: Text(e.title)))
+                    .toList(),
+              )
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  void _onTap(BuildContext context) {
+    //TODO:
+    // WebviewRouteData(link: data.lisenseLink).push(context);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wan_android/feature/project/data/project_list_item.dart';
+import 'package:wan_android/routers/go_router_builder.dart';
 
 class ProjectListItemView extends StatelessWidget {
   final ProjectListItem data;
@@ -8,23 +9,26 @@ class ProjectListItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-          height: 160,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AspectRatio(
-                aspectRatio: 9 / 16,
-                child: Image(image: NetworkImage(data.envelopePic)),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: _textContent(context),
-              )
-            ],
+    return InkWell(
+      onTap: () => _onTap(context),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            height: 160,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AspectRatio(
+                  aspectRatio: 9 / 16,
+                  child: Image(image: NetworkImage(data.envelopePic)),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: _textContent(context),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -72,5 +76,9 @@ class ProjectListItemView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _onTap(BuildContext context) {
+    WebviewRouteData(link: data.link).push(context);
   }
 }
