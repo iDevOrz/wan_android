@@ -4,7 +4,7 @@ part 'project_tree_item.freezed.dart';
 part 'project_tree_item.g.dart';
 
 @freezed
-class ProjectTreeItem with _$ProjectTreeItem {
+abstract class ProjectTreeItem with _$ProjectTreeItem {
   const factory ProjectTreeItem({
     required List<dynamic> articleList,
     required String author,

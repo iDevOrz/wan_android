@@ -5,37 +5,37 @@ import 'package:wan_android/services/network/data/error_response.dart';
 part 'network_exception.freezed.dart';
 
 @freezed
-class NetworkException with _$NetworkException {
+sealed class NetworkException with _$NetworkException {
   const factory NetworkException.needLogin({String? errorMsg}) =
-      _NetworkExceptionNeedLogin;
+      NetworkExceptionNeedLogin;
 
-  const factory NetworkException.formatException() = _FormatException;
+  const factory NetworkException.formatException() = FormatException;
 
   const factory NetworkException.unrecognizedException(Exception error) =
-      _UnrecognizedException;
+      UnrecognizedException;
 
   const factory NetworkException.apiException({
     required int errorCode,
     String? errorMsg,
-  }) = _ApiException;
+  }) = ApiException;
 
-  const factory NetworkException.cancelException() = _CancelException;
+  const factory NetworkException.cancelException() = CancelException;
 
   const factory NetworkException.connectTimeoutException() =
-      _ConnectTimeoutException;
+      ConnectTimeoutException;
 
   const factory NetworkException.receiveTimeoutException() =
-      _ReceiveTimeoutException;
+      ReceiveTimeoutException;
 
-  const factory NetworkException.sendTimeoutException() = _SendTimeoutException;
+  const factory NetworkException.sendTimeoutException() = SendTimeoutException;
 
   const factory NetworkException.badCertificateException() =
-      _BadCertificateException;
+      BadCertificateException;
 
-  const factory NetworkException.badResponseException() = _BadResponseException;
+  const factory NetworkException.badResponseException() = BadResponseException;
 
   const factory NetworkException.connectionErrorException() =
-      _ConnectionErrorException;
+      ConnectionErrorException;
 
   static NetworkException getDioException(Exception error) {
     if (error is DioException) {

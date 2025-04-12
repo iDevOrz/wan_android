@@ -1,11 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'api_base_response.g.dart';
 part 'api_base_response.freezed.dart';
+part 'api_base_response.g.dart';
 
 @freezed
-@JsonSerializable(genericArgumentFactories: true, createToJson: false)
-class ApiBaseResponse<T> with _$ApiBaseResponse<T> {
+abstract class ApiBaseResponse<T> with _$ApiBaseResponse<T> {
+  @JsonSerializable(genericArgumentFactories: true)
   const factory ApiBaseResponse(
       {required T data,
       required int errorCode,

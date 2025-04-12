@@ -4,7 +4,7 @@ part 'project_list_item.freezed.dart';
 part 'project_list_item.g.dart';
 
 @freezed
-class ProjectListItem with _$ProjectListItem {
+abstract class ProjectListItem with _$ProjectListItem {
   const factory ProjectListItem({
     required bool adminAdd,
     required String apkLink,
@@ -48,7 +48,7 @@ class ProjectListItem with _$ProjectListItem {
 }
 
 @freezed
-class ProjectTag with _$ProjectTag {
+abstract class ProjectTag with _$ProjectTag {
   const factory ProjectTag({
     required String name,
     required String url,

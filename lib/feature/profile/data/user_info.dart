@@ -4,7 +4,7 @@ part 'user_info.freezed.dart';
 part 'user_info.g.dart';
 
 @freezed
-class UserInfo with _$UserInfo {
+abstract class UserInfo with _$UserInfo {
   const factory UserInfo({
     required CoinInfo coinInfo,
     required UserInfoClass userInfo,
@@ -15,7 +15,7 @@ class UserInfo with _$UserInfo {
 }
 
 @freezed
-class CoinInfo with _$CoinInfo {
+abstract class CoinInfo with _$CoinInfo {
   const factory CoinInfo({
     required int coinCount,
     required int level,
@@ -30,7 +30,7 @@ class CoinInfo with _$CoinInfo {
 }
 
 @freezed
-class UserInfoClass with _$UserInfoClass {
+abstract class UserInfoClass with _$UserInfoClass {
   const factory UserInfoClass({
     required bool admin,
     required List<dynamic> chapterTops,

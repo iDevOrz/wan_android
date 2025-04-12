@@ -4,7 +4,7 @@ part 'search_hotkey.freezed.dart';
 part 'search_hotkey.g.dart';
 
 @freezed
-class SearchHotkey with _$SearchHotkey {
+abstract class SearchHotkey with _$SearchHotkey {
   const factory SearchHotkey({
     required int id,
     required String link,

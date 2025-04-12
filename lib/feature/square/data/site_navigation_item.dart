@@ -4,7 +4,7 @@ part 'site_navigation_item.freezed.dart';
 part 'site_navigation_item.g.dart';
 
 @freezed
-class SiteNavigationItem with _$SiteNavigationItem {
+abstract class SiteNavigationItem with _$SiteNavigationItem {
   const factory SiteNavigationItem({
     required List<Article> articles,
     required int cid,
@@ -16,7 +16,7 @@ class SiteNavigationItem with _$SiteNavigationItem {
 }
 
 @freezed
-class Article with _$Article {
+abstract class Article with _$Article {
   const factory Article({
     required bool adminAdd,
     required String apkLink,

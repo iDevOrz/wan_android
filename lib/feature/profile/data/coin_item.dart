@@ -4,7 +4,7 @@ part 'coin_item.freezed.dart';
 part 'coin_item.g.dart';
 
 @freezed
-class CoinItem with _$CoinItem {
+abstract class CoinItem with _$CoinItem {
   const factory CoinItem({
     required int coinCount,
     required int date,

@@ -6,7 +6,7 @@ part 'home_article_list_item.g.dart';
 /// 首页文章列表
 /// https://www.wanandroid.com/article/list/0/json
 @freezed
-class HomeArticleListItem with _$HomeArticleListItem {
+abstract class HomeArticleListItem with _$HomeArticleListItem {
   const factory HomeArticleListItem({
     required bool adminAdd,
     required String apkLink,
@@ -50,7 +50,7 @@ class HomeArticleListItem with _$HomeArticleListItem {
 }
 
 @freezed
-class ArticleTag with _$ArticleTag {
+abstract class ArticleTag with _$ArticleTag {
   const factory ArticleTag({
     required String name,
     required String url,

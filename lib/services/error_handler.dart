@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:wan_android/routers/go_router_builder.dart';
+import 'package:wan_android/routers/go_router_builder.dart'
+    show $LoginRouteDataExtension, LoginRouteData;
 import 'package:wan_android/services/network/network_exception.dart';
 
 class ErrorHandler {
@@ -13,32 +14,40 @@ class ErrorHandler {
 
   FutureOr _handleNetworkException(BuildContext context,
       {required NetworkException networkException}) {
-    networkException.maybeWhen(
-      needLogin: (errorMsg) => showDialog(
-        context: context,
-        useRootNavigator: true,
-        builder: (ct) => AlertDialog(
-          content: Text(errorMsg ?? ""),
-          actions: [
-            FilledButton(
-                onPressed: () {
-                  Navigator.of(ct).pop();
-                  const LoginRouteData().push(context);
-                },
-                child: const Text("去登录"))
-          ],
-        ),
-      ),
-      apiException: (int errorCode, String? errorMsg) {
+    switch (networkException) {
+      case NetworkExceptionNeedLogin():
+        showDialog(
+          context: context,
+          useRootNavigator: true,
+          builder: (ct) => AlertDialog(
+            content: Text(networkException.errorMsg ?? ""),
+            actions: [
+              FilledButton(
+                  onPressed: () {
+                    Navigator.of(ct).pop();
+                    const LoginRouteData().push(context);
+                  },
+                  child: const Text("去登录"))
+            ],
+          ),
+        );
+      case ApiException():
         final errorSnackBar = SnackBar(
             behavior: SnackBarBehavior.floating,
             margin: MediaQuery.of(context).viewInsets,
-            content: Text("${errorMsg ?? "未知异常"} code $errorCode"));
+            content: Text(
+                "${networkException.errorMsg ?? "未知异常"} code ${networkException.errorCode}"));
         ScaffoldMessenger.of(context).showSnackBar(errorSnackBar);
-      },
-      orElse: () => debugPrint(
-        networkException.toString(),
-      ),
-    );
+      case FormatException():
+      case UnrecognizedException():
+      case ConnectTimeoutException():
+      case ReceiveTimeoutException():
+      case SendTimeoutException():
+      case BadCertificateException():
+      case BadResponseException():
+      case ConnectionErrorException():
+      case CancelException():
+        debugPrint(networkException.toString());
+    }
   }
 }

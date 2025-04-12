@@ -4,7 +4,7 @@ part 'knowledge_system_tree.freezed.dart';
 part 'knowledge_system_tree.g.dart';
 
 @freezed
-class KnowledgeSystemTree with _$KnowledgeSystemTree {
+abstract class KnowledgeSystemTree with _$KnowledgeSystemTree {
   const factory KnowledgeSystemTree({
     required List<dynamic> articleList,
     required String author,

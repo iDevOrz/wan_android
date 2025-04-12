@@ -6,7 +6,7 @@ part 'home_banner_item.g.dart';
 /// 首页 Banner
 /// https://www.wanandroid.com/banner/json
 @freezed
-class HomeBannerItem with _$HomeBannerItem {
+abstract class HomeBannerItem with _$HomeBannerItem {
   const factory HomeBannerItem({
     required String desc,
     required int id,
