@@ -5,10 +5,11 @@ part 'auth_service.g.dart';
 
 class AuthService {
   AuthService(this.ref);
+
   final Ref ref;
 }
 
 @riverpod
-AuthService authService(AuthServiceRef ref) {
+AuthService authService(Ref ref) {
   return AuthService(ref);
 }

@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wan_android/services/network/api_interface.dart';
 import 'package:wan_android/services/network/api_service_provider.dart';
@@ -11,6 +12,7 @@ part 'profile_repository.g.dart';
 
 class ProfileRepository {
   final ApiInterface _apiService;
+
   ProfileRepository(ApiInterface apiService) : _apiService = apiService;
 
   Future<ApiBaseResponse<UserInfo>> getUserInfo() {
@@ -37,6 +39,6 @@ class ProfileRepository {
 }
 
 @Riverpod(keepAlive: true)
-ProfileRepository profileRepository(ProfileRepositoryRef ref) {
+ProfileRepository profileRepository(Ref ref) {
   return ProfileRepository(ref.watch(apiServiceProvider));
 }

@@ -1,6 +1,7 @@
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:talker_dio_logger/talker_dio_logger_interceptor.dart';
 import 'package:talker_dio_logger/talker_dio_logger_settings.dart';
@@ -19,7 +20,7 @@ const _baseUrl = String.fromEnvironment(
 );
 
 @Riverpod(keepAlive: true)
-ApiInterface apiService(ApiServiceRef ref) {
+ApiInterface apiService(Ref ref) {
   return ApiService(
     DioService(
         dioClient: Dio(

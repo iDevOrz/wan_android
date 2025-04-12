@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:easy_refresh/easy_refresh.dart' show IndicatorResult;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wan_android/feature/home/data/home_article_list_item.dart';
 import 'package:wan_android/feature/home/data/home_banner_item.dart';
@@ -61,7 +62,7 @@ class HomeController extends _$HomeController {
 }
 
 @Riverpod(keepAlive: true)
-Future<List<HomeBannerItem>> homeBannerList(HomeBannerListRef ref) async {
+Future<List<HomeBannerItem>> homeBannerList(Ref ref) async {
   return await ref
       .watch(homeRepositoryProvider)
       .getHomeBannerList()

@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wan_android/feature/project/data/project_list_item.dart';
 import 'package:wan_android/feature/square/data/site_navigation_item.dart';
@@ -12,6 +13,7 @@ part 'square_repository.g.dart';
 
 class SquareRepository {
   final ApiInterface _apiService;
+
   SquareRepository({required ApiInterface apiService})
       : _apiService = apiService;
 
@@ -55,6 +57,6 @@ class SquareRepository {
 }
 
 @Riverpod(keepAlive: true)
-SquareRepository squareRepository(SquareRepositoryRef ref) {
+SquareRepository squareRepository(Ref ref) {
   return SquareRepository(apiService: ref.watch(apiServiceProvider));
 }

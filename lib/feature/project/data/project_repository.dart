@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wan_android/feature/project/data/project_tree_item.dart';
 import 'package:wan_android/services/network/api_interface.dart';
@@ -11,6 +12,7 @@ part 'project_repository.g.dart';
 
 class ProjectRepository {
   final ApiInterface _apiService;
+
   ProjectRepository({required ApiInterface apiService})
       : _apiService = apiService;
 
@@ -36,6 +38,6 @@ class ProjectRepository {
 }
 
 @Riverpod(keepAlive: true)
-ProjectRepository projectRepository(ProjectRepositoryRef ref) {
+ProjectRepository projectRepository(Ref ref) {
   return ProjectRepository(apiService: ref.watch(apiServiceProvider));
 }

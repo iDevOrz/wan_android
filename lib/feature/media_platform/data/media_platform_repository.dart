@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wan_android/feature/project/data/project_list_item.dart';
 import 'package:wan_android/services/network/api_interface.dart';
@@ -11,6 +12,7 @@ part 'media_platform_repository.g.dart';
 
 class MediaPlatformRepository {
   final ApiInterface _apiService;
+
   MediaPlatformRepository({required ApiInterface apiService})
       : _apiService = apiService;
 
@@ -38,7 +40,6 @@ class MediaPlatformRepository {
 }
 
 @riverpod
-MediaPlatformRepository mediaPlatformRepository(
-    MediaPlatformRepositoryRef ref) {
+MediaPlatformRepository mediaPlatformRepository(Ref ref) {
   return MediaPlatformRepository(apiService: ref.watch(apiServiceProvider));
 }
