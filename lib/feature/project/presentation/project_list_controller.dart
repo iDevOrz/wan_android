@@ -46,7 +46,7 @@ class ProjectListController extends _$ProjectListController {
     }
     try {
       final result = await _loadProjectList();
-      final previousData = state.valueOrNull?.datas ?? [];
+      final previousData = state.value?.datas ?? [];
       state = AsyncValue.data(
           result.copyWith(datas: [...previousData, ...result.datas]));
       return result.over ? IndicatorResult.noMore : IndicatorResult.success;
@@ -59,11 +59,11 @@ class ProjectListController extends _$ProjectListController {
   }
 }
 
-final projectListProvider = StateNotifierProvider.family<
-    PaginationNotifier<ProjectListItem>,
-    AsyncValue<BasePaginationData<ProjectListItem>>,
-    int>((ref, cid) {
-  return PaginationNotifier((pageIndex) => ref
+final projectListProvider = AsyncNotifierProvider.family<
+    PaginationNotifier<ProjectListItem, int>,
+    BasePaginationData<ProjectListItem>,
+    int>(() {
+  return PaginationNotifier((ref, pageIndex, cid) => ref
       .read(projectRepositoryProvider)
       .getProjectPaginationList(pageIndex: pageIndex, cid: cid)
       .then((value) => value.data));

@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:wan_android/routers/go_router_builder.dart'
-    show $LoginRouteDataExtension, LoginRouteData;
+import 'package:wan_android/routers/go_router_builder.dart' show LoginRouteData;
 import 'package:wan_android/services/network/network_exception.dart';
 
 class ErrorHandler {

@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:talker_flutter/talker_flutter.dart';
-import 'package:talker_riverpod_logger/talker_riverpod_logger.dart';
 import 'package:wan_android/routers/go_router_builder.dart';
 
 import 'services/storage/storage_config.dart';
-
-final talker = TalkerFlutter.init();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StorageConfig.init();
   runApp(
     ProviderScope(
-      observers: [TalkerRiverpodObserver(talker: talker)],
       child: const MyApp(),
     ),
   );
@@ -48,17 +43,6 @@ class _MyAppState extends State<MyApp> {
       routeInformationParser: _router.routeInformationParser,
       routeInformationProvider: _router.routeInformationProvider,
       routerDelegate: _router.routerDelegate,
-      builder: (ct, child) {
-        return GestureDetector(
-          onLongPress: () {
-            Navigator.of(rootNavigatorKey.currentContext!)
-                .push(MaterialPageRoute(
-              builder: (context) => TalkerScreen(talker: talker),
-            ));
-          },
-          child: child!,
-        );
-      },
     );
   }
 }

@@ -39,7 +39,7 @@ class MainTabBarShellRouteData extends ShellRouteData {
 }
 
 @immutable
-class HomeRouteData extends GoRouteData {
+class HomeRouteData extends GoRouteData with _$HomeRouteData {
   const HomeRouteData();
 
   @override
@@ -49,7 +49,7 @@ class HomeRouteData extends GoRouteData {
 }
 
 @immutable
-class ProjectRouteData extends GoRouteData {
+class ProjectRouteData extends GoRouteData with _$ProjectRouteData {
   const ProjectRouteData();
 
   @override
@@ -59,7 +59,7 @@ class ProjectRouteData extends GoRouteData {
 }
 
 @immutable
-class SquareRouteData extends GoRouteData {
+class SquareRouteData extends GoRouteData with _$SquareRouteData {
   const SquareRouteData();
 
   @override
@@ -69,7 +69,7 @@ class SquareRouteData extends GoRouteData {
 }
 
 @immutable
-class MediaPlatformRouteData extends GoRouteData {
+class MediaPlatformRouteData extends GoRouteData with _$MediaPlatformRouteData {
   const MediaPlatformRouteData();
 
   @override
@@ -79,7 +79,7 @@ class MediaPlatformRouteData extends GoRouteData {
 }
 
 @immutable
-class ProfileRouteData extends GoRouteData {
+class ProfileRouteData extends GoRouteData with _$ProfileRouteData {
   const ProfileRouteData();
 
   @override
@@ -89,7 +89,7 @@ class ProfileRouteData extends GoRouteData {
 }
 
 @immutable
-class CoinDetailRouteData extends GoRouteData {
+class CoinDetailRouteData extends GoRouteData with _$CoinDetailRouteData {
   const CoinDetailRouteData();
 
   @override
@@ -99,7 +99,7 @@ class CoinDetailRouteData extends GoRouteData {
 }
 
 @TypedGoRoute<LoginRouteData>(path: '/login')
-class LoginRouteData extends GoRouteData {
+class LoginRouteData extends GoRouteData with _$LoginRouteData {
   const LoginRouteData();
 
   @override
@@ -109,7 +109,7 @@ class LoginRouteData extends GoRouteData {
 }
 
 @TypedGoRoute<WebviewRouteData>(path: '/detail')
-class WebviewRouteData extends GoRouteData {
+class WebviewRouteData extends GoRouteData with _$WebviewRouteData {
   const WebviewRouteData({required this.link});
 
   final String link;
