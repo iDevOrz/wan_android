@@ -32,8 +32,9 @@ class PaginationNotifier<Item, T>
       return IndicatorResult.success;
     } catch (error, stackTrace) {
       // 在 AsyncNotifier 中，错误处理会自动更新 state
-      state = AsyncValue<BasePaginationData<Item>>.error(error, stackTrace)
-          .copyWithPrevious(state);
+
+      state = AsyncValue<BasePaginationData<Item>>.error(error, stackTrace);
+      // .copyWithPrevious(state);
       return IndicatorResult.fail;
     }
   }
@@ -53,8 +54,8 @@ class PaginationNotifier<Item, T>
           ? IndicatorResult.noMore
           : IndicatorResult.success;
     } catch (error, stackTrace) {
-      state = AsyncValue<BasePaginationData<Item>>.error(error, stackTrace)
-          .copyWithPrevious(state);
+      state = AsyncValue<BasePaginationData<Item>>.error(error, stackTrace);
+      // .copyWithPrevious(state);
       return IndicatorResult.fail;
     }
   }
