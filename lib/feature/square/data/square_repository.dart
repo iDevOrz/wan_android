@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wan_android/feature/project/data/project_list_item.dart';
 import 'package:wan_android/feature/square/data/site_navigation_item.dart';

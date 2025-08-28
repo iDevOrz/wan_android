@@ -11,6 +11,7 @@ Future<void> main() async {
   runApp(
     ProviderScope(
       child: const MyApp(),
+      retry: (_, __) => null,
     ),
   );
 }

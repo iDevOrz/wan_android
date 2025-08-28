@@ -35,8 +35,9 @@ class HomeController extends _$HomeController {
       return IndicatorResult.success;
     } catch (error, stackTrace) {
       state = AsyncValue<BasePaginationData<HomeArticleListItem>>.error(
-              error, stackTrace)
-          .copyWithPrevious(state);
+          error, stackTrace);
+      // .copyWithPrevious(state);
+
       return IndicatorResult.fail;
     }
   }
@@ -53,8 +54,8 @@ class HomeController extends _$HomeController {
       return result.over ? IndicatorResult.noMore : IndicatorResult.success;
     } catch (error, stackTrace) {
       state = AsyncValue<BasePaginationData<HomeArticleListItem>>.error(
-              error, stackTrace)
-          .copyWithPrevious(state);
+          error, stackTrace);
+      // .copyWithPrevious(state);
       return IndicatorResult.fail;
     }
   }

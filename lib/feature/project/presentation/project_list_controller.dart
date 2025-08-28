@@ -34,8 +34,8 @@ class ProjectListController extends _$ProjectListController {
       return IndicatorResult.success;
     } catch (error, stackTrace) {
       state = AsyncValue<BasePaginationData<ProjectListItem>>.error(
-              error, stackTrace)
-          .copyWithPrevious(state);
+          error, stackTrace);
+      // .copyWithPrevious(state);
       return IndicatorResult.fail;
     }
   }
@@ -52,8 +52,8 @@ class ProjectListController extends _$ProjectListController {
       return result.over ? IndicatorResult.noMore : IndicatorResult.success;
     } catch (error, stackTrace) {
       state = AsyncValue<BasePaginationData<ProjectListItem>>.error(
-              error, stackTrace)
-          .copyWithPrevious(state);
+          error, stackTrace);
+      // .copyWithPrevious(state);
       return IndicatorResult.fail;
     }
   }
