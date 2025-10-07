@@ -8,12 +8,7 @@ import 'services/storage/storage_config.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StorageConfig.init();
-  runApp(
-    ProviderScope(
-      child: const MyApp(),
-      retry: (_, __) => null,
-    ),
-  );
+  runApp(ProviderScope(child: const MyApp(), retry: (_, _) => null));
 }
 
 class MyApp extends StatefulWidget {

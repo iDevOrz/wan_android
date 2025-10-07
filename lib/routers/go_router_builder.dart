@@ -22,9 +22,10 @@ final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>();
     TypedGoRoute<ProjectRouteData>(path: '/project'),
     TypedGoRoute<SquareRouteData>(path: '/square'),
     TypedGoRoute<MediaPlatformRouteData>(path: '/mediaPlatform'),
-    TypedGoRoute<ProfileRouteData>(path: '/profile', routes: [
-      TypedGoRoute<CoinDetailRouteData>(path: 'coin'),
-    ]),
+    TypedGoRoute<ProfileRouteData>(
+      path: '/profile',
+      routes: [TypedGoRoute<CoinDetailRouteData>(path: 'coin')],
+    ),
   ],
 )
 class MainTabBarShellRouteData extends ShellRouteData {
@@ -39,7 +40,7 @@ class MainTabBarShellRouteData extends ShellRouteData {
 }
 
 @immutable
-class HomeRouteData extends GoRouteData with _$HomeRouteData {
+class HomeRouteData extends GoRouteData with $HomeRouteData {
   const HomeRouteData();
 
   @override
@@ -49,7 +50,7 @@ class HomeRouteData extends GoRouteData with _$HomeRouteData {
 }
 
 @immutable
-class ProjectRouteData extends GoRouteData with _$ProjectRouteData {
+class ProjectRouteData extends GoRouteData with $ProjectRouteData {
   const ProjectRouteData();
 
   @override
@@ -59,7 +60,7 @@ class ProjectRouteData extends GoRouteData with _$ProjectRouteData {
 }
 
 @immutable
-class SquareRouteData extends GoRouteData with _$SquareRouteData {
+class SquareRouteData extends GoRouteData with $SquareRouteData {
   const SquareRouteData();
 
   @override
@@ -69,7 +70,7 @@ class SquareRouteData extends GoRouteData with _$SquareRouteData {
 }
 
 @immutable
-class MediaPlatformRouteData extends GoRouteData with _$MediaPlatformRouteData {
+class MediaPlatformRouteData extends GoRouteData with $MediaPlatformRouteData {
   const MediaPlatformRouteData();
 
   @override
@@ -79,7 +80,7 @@ class MediaPlatformRouteData extends GoRouteData with _$MediaPlatformRouteData {
 }
 
 @immutable
-class ProfileRouteData extends GoRouteData with _$ProfileRouteData {
+class ProfileRouteData extends GoRouteData with $ProfileRouteData {
   const ProfileRouteData();
 
   @override
@@ -89,7 +90,7 @@ class ProfileRouteData extends GoRouteData with _$ProfileRouteData {
 }
 
 @immutable
-class CoinDetailRouteData extends GoRouteData with _$CoinDetailRouteData {
+class CoinDetailRouteData extends GoRouteData with $CoinDetailRouteData {
   const CoinDetailRouteData();
 
   @override
@@ -99,7 +100,7 @@ class CoinDetailRouteData extends GoRouteData with _$CoinDetailRouteData {
 }
 
 @TypedGoRoute<LoginRouteData>(path: '/login')
-class LoginRouteData extends GoRouteData with _$LoginRouteData {
+class LoginRouteData extends GoRouteData with $LoginRouteData {
   const LoginRouteData();
 
   @override
@@ -109,7 +110,7 @@ class LoginRouteData extends GoRouteData with _$LoginRouteData {
 }
 
 @TypedGoRoute<WebviewRouteData>(path: '/detail')
-class WebviewRouteData extends GoRouteData with _$WebviewRouteData {
+class WebviewRouteData extends GoRouteData with $WebviewRouteData {
   const WebviewRouteData({required this.link});
 
   final String link;

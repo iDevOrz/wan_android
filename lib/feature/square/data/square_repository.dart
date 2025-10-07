@@ -14,12 +14,12 @@ class SquareRepository {
   final ApiInterface _apiService;
 
   SquareRepository({required ApiInterface apiService})
-      : _apiService = apiService;
+    : _apiService = apiService;
 
   /// 广场列表数据
   /// https://wanandroid.com/user_article/list/0/json
   Future<ApiBaseResponse<BasePaginationData<ProjectListItem>>>
-      getSquarePaginationList({required pageIndex}) {
+  getSquarePaginationList({required int pageIndex}) {
     return _apiService.getPaginationData(
       path: "/user_article/list/$pageIndex/json",
       paginationItemConverter: ProjectListItem.fromJson,
@@ -29,7 +29,7 @@ class SquareRepository {
   /// 问答
   /// https://wanandroid.com/wenda/list/1/json
   Future<ApiBaseResponse<BasePaginationData<ProjectListItem>>>
-      getQuestionPaginationList({required pageIndex}) {
+  getQuestionPaginationList({required int pageIndex}) {
     return _apiService.getPaginationData(
       path: "/wenda/list/$pageIndex/json",
       paginationItemConverter: ProjectListItem.fromJson,

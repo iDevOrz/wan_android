@@ -13,20 +13,21 @@ class ProjectListView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.read(projectListProvider(cid).notifier);
+    final notifier = ref.read(projectListControllerProvider(cid: cid).notifier);
     final asyncData = ref.watch(projectListControllerProvider(cid: cid));
     return EasyRefresh(
       onRefresh: notifier.onRefresh,
       onLoad: asyncData.hasValue ? notifier.onLoad : null,
       child: AsyncValueWidget(
-          value: asyncData,
-          data: (data) {
-            return ListView.builder(
-              itemCount: data.datas.length,
-              itemBuilder: (ct, index) =>
-                  ProjectListItemView(data: data.datas[index]),
-            );
-          }),
+        value: asyncData,
+        data: (data) {
+          return ListView.builder(
+            itemCount: data.datas.length,
+            itemBuilder: (ct, index) =>
+                ProjectListItemView(data: data.datas[index]),
+          );
+        },
+      ),
     );
   }
 }

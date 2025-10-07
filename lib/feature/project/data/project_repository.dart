@@ -13,7 +13,7 @@ class ProjectRepository {
   final ApiInterface _apiService;
 
   ProjectRepository({required ApiInterface apiService})
-      : _apiService = apiService;
+    : _apiService = apiService;
 
   /// 项目分类
   /// https://www.wanandroid.com/project/tree/json
@@ -27,7 +27,7 @@ class ProjectRepository {
   /// 项目列表数据
   /// https://www.wanandroid.com/project/list/1/json?cid=294
   Future<ApiBaseResponse<BasePaginationData<ProjectListItem>>>
-      getProjectPaginationList({required pageIndex, int? cid}) {
+  getProjectPaginationList({required int pageIndex, int? cid}) {
     return _apiService.getPaginationData(
       path: "/project/list/1/json",
       queryParams: {"cid": cid},
