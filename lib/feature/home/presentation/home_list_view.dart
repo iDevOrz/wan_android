@@ -12,22 +12,27 @@ class HomeListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => _onTap(context),
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                data.title,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              const SizedBox(height: 10),
-              Text(
-                data.superChapterName,
-                style: Theme.of(context).textTheme.labelSmall,
-              )
-            ],
+      child: Hero(
+        tag: data.link,
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  data.title,
+                  style: Theme.of(context).textTheme.titleMedium,
+                  semanticsLabel: '文章标题: ${data.title}',
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  data.superChapterName,
+                  style: Theme.of(context).textTheme.labelSmall,
+                  semanticsLabel: '分类: ${data.superChapterName}',
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -35,7 +40,15 @@ class HomeListView extends StatelessWidget {
   }
 
   void _onTap(BuildContext context) {
-    WebviewRouteData(link: data.link).push(context);
+    try {
+      if (data.link.isNotEmpty) {
+        WebviewRouteData(link: data.link).push(context);
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('无法打开链接')),
+      );
+    }
   }
 
   @override

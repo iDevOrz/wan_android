@@ -17,7 +17,7 @@ class HomeRepository {
 
   /// 首页文章列表
   Future<ApiBaseResponse<BasePaginationData<HomeArticleListItem>>>
-      getArticlePaginationList({required pageIndex}) {
+  getArticlePaginationList({required int pageIndex}) {
     return _apiService.getPaginationData(
       path: "/article/list/$pageIndex/json",
       paginationItemConverter: HomeArticleListItem.fromJson,
