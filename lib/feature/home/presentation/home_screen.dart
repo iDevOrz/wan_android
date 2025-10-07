@@ -15,52 +15,57 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final homeNotifier = ref.read(homeControllerProvider.notifier);
     return Scaffold(
-      body: EasyRefresh(
-        onRefresh: homeNotifier.onRefresh,
-        onLoad: homeNotifier.onLoad,
-        child: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return [
-              SliverToBoxAdapter(
-                child: AspectRatio(
-                  aspectRatio: 900 / 500,
-                  child: AsyncValueWidget(
-                    value: ref.watch(homeBannerListProvider),
-                    data: (data) => _homeBannerBuilder(context, data: data),
-                  ),
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return [
+            SliverToBoxAdapter(
+              child: AspectRatio(
+                aspectRatio: 900 / 500,
+                child: AsyncValueWidget(
+                  value: ref.watch(homeBannerListProvider),
+                  data: (data) => _homeBannerBuilder(context, data: data),
                 ),
-              )
-            ];
-          },
-          body: AsyncValueWidget(
-            value: ref.watch(homeControllerProvider),
-            data: (data) => _listViewBuilder(
-              context,
-              data: data.datas,
+              ),
             ),
-          ),
+          ];
+        },
+        body: AsyncValueWidget(
+          value: ref.watch(homeControllerProvider),
+          data: (data) => _listViewBuilder(context, ref, data: data.datas),
         ),
       ),
     );
   }
 
-  Widget _listViewBuilder(BuildContext context,
-      {required List<HomeArticleListItem> data}) {
-    return ListView.builder(
-      padding: const EdgeInsets.all(8),
-      itemCount: data.length,
-      itemBuilder: (_, index) => HomeListView(data: data[index]),
+  Widget _listViewBuilder(
+    BuildContext context,
+    WidgetRef ref, {
+    required List<HomeArticleListItem> data,
+  }) {
+    final controller = ref.read(homeControllerProvider.notifier);
+    return EasyRefresh(
+      onRefresh: controller.onRefresh,
+      onLoad: controller.onLoad,
+      child: ListView.builder(
+        padding: const EdgeInsets.all(8),
+        itemCount: data.length,
+        itemBuilder: (_, index) => HomeListView(data: data[index]),
+      ),
     );
   }
 
-  Widget _homeBannerBuilder(BuildContext context,
-      {required List<HomeBannerItem> data}) {
+  Widget _homeBannerBuilder(
+    BuildContext context, {
+    required List<HomeBannerItem> data,
+  }) {
     if (data.isEmpty) {
       return const Text("暂无数据", textAlign: TextAlign.center);
     }
-    return PageView.builder(itemBuilder: (ct, index) {
-      final itemData = data[index % data.length];
-      return CachedNetworkImage(imageUrl: itemData.imagePath);
-    });
+    return PageView.builder(
+      itemBuilder: (ct, index) {
+        final itemData = data[index % data.length];
+        return CachedNetworkImage(imageUrl: itemData.imagePath);
+      },
+    );
   }
 }
