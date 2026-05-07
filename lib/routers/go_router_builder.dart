@@ -13,17 +13,25 @@ import 'main_tab_bar.dart';
 
 part 'go_router_builder.g.dart';
 
-final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
-final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(
+  debugLabel: "rootNavigatorKey",
+);
+final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>(
+  debugLabel: "shellNavigatorKey",
+);
 
 @TypedShellRoute<MainTabBarShellRouteData>(
   routes: <TypedRoute<RouteData>>[
-    TypedGoRoute<HomeRouteData>(path: '/home'),
-    TypedGoRoute<ProjectRouteData>(path: '/project'),
-    TypedGoRoute<SquareRouteData>(path: '/square'),
-    TypedGoRoute<MediaPlatformRouteData>(path: '/mediaPlatform'),
+    TypedGoRoute<HomeRouteData>(path: '/home', name: "home"),
+    TypedGoRoute<ProjectRouteData>(path: '/project', name: "project"),
+    TypedGoRoute<SquareRouteData>(path: '/square', name: "square"),
+    TypedGoRoute<MediaPlatformRouteData>(
+      path: '/mediaPlatform',
+      name: "mediaPlatform",
+    ),
     TypedGoRoute<ProfileRouteData>(
       path: '/profile',
+      name: "profile",
       routes: [TypedGoRoute<CoinDetailRouteData>(path: 'coin')],
     ),
   ],
@@ -42,10 +50,10 @@ class MainTabBarShellRouteData extends ShellRouteData {
 @immutable
 class HomeRouteData extends GoRouteData with $HomeRouteData {
   const HomeRouteData();
-
+  
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return const NoTransitionPage(child: HomeScreen());
+    return NoTransitionPage(name: state.name, child: HomeScreen());
   }
 }
 
@@ -55,7 +63,7 @@ class ProjectRouteData extends GoRouteData with $ProjectRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return const NoTransitionPage(child: ProjectScreen());
+    return NoTransitionPage(name: state.name, child: ProjectScreen());
   }
 }
 
@@ -65,7 +73,7 @@ class SquareRouteData extends GoRouteData with $SquareRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return const NoTransitionPage(child: SquareScreen());
+    return NoTransitionPage(name: state.name, child: SquareScreen());
   }
 }
 
@@ -75,7 +83,7 @@ class MediaPlatformRouteData extends GoRouteData with $MediaPlatformRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return const NoTransitionPage(child: MediaPlatformScreen());
+    return NoTransitionPage(name: state.name, child: MediaPlatformScreen());
   }
 }
 
@@ -85,7 +93,7 @@ class ProfileRouteData extends GoRouteData with $ProfileRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return const NoTransitionPage(child: ProfileScreen());
+    return NoTransitionPage(name: state.name, child: ProfileScreen());
   }
 }
 

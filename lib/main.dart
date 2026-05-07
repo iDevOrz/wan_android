@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wan_android/route_name_log_navigator_observer.dart';
 import 'package:wan_android/routers/go_router_builder.dart';
 
 import 'services/storage/storage_config.dart';
@@ -28,6 +29,7 @@ class _MyAppState extends State<MyApp> {
       initialLocation: "/home",
       routes: $appRoutes,
       navigatorKey: rootNavigatorKey,
+      observers: [RouteNameLogNavigatorObserver()],
     );
     super.initState();
   }

@@ -11,31 +11,37 @@ class ErrorHandler {
     }
   }
 
-  FutureOr _handleNetworkException(BuildContext context,
-      {required NetworkException networkException}) {
+  FutureOr _handleNetworkException(
+    BuildContext context, {
+    required NetworkException networkException,
+  }) {
     switch (networkException) {
       case NetworkExceptionNeedLogin():
         showDialog(
           context: context,
           useRootNavigator: true,
+          routeSettings: RouteSettings(name: "needLoginDialog"),
           builder: (ct) => AlertDialog(
             content: Text(networkException.errorMsg ?? ""),
             actions: [
               FilledButton(
-                  onPressed: () {
-                    Navigator.of(ct).pop();
-                    const LoginRouteData().push(context);
-                  },
-                  child: const Text("去登录"))
+                onPressed: () {
+                  Navigator.of(ct).pop();
+                  const LoginRouteData().push(context);
+                },
+                child: const Text("去登录"),
+              ),
             ],
           ),
         );
       case ApiException():
         final errorSnackBar = SnackBar(
-            behavior: SnackBarBehavior.floating,
-            margin: MediaQuery.of(context).viewInsets,
-            content: Text(
-                "${networkException.errorMsg ?? "未知异常"} code ${networkException.errorCode}"));
+          behavior: SnackBarBehavior.floating,
+          margin: MediaQuery.of(context).viewInsets,
+          content: Text(
+            "${networkException.errorMsg ?? "未知异常"} code ${networkException.errorCode}",
+          ),
+        );
         ScaffoldMessenger.of(context).showSnackBar(errorSnackBar);
       case FormatException():
       case UnrecognizedException():
