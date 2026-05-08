@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wan_android/routers/go_router_builder.dart';
 
 class MainTabBar extends StatefulWidget {
   final Widget child;
@@ -12,50 +13,58 @@ class MainTabBar extends StatefulWidget {
 
 class _MainTabBarState extends State<MainTabBar> {
   int _locationToTabIndex(String location) {
-    final index = tabs.indexWhere((t) => location.startsWith(t.routerPath));
+    final index = tabs.indexWhere(
+          (t) =>
+          location.startsWith(t
+              .goRouteData()
+              .location),
+    );
 
     return index < 0 ? 0 : index;
   }
 
   int get _currentIndex =>
-      _locationToTabIndex(GoRouterState.of(context).uri.toString());
+      _locationToTabIndex(GoRouterState
+          .of(context)
+          .uri
+          .toString());
 
   final List<MainTabBarItem> tabs = <MainTabBarItem>[
-    const MainTabBarItem(
-      icon: Icon(Icons.home),
-      activeIcon: Icon(Icons.home),
+    MainTabBarItem(
+      icon: const Icon(Icons.home),
+      activeIcon: const Icon(Icons.home),
       label: "首页",
-      routerPath: '/home',
+      goRouteData: () => const HomeRouteData(),
     ),
-    const MainTabBarItem(
-      icon: Icon(Icons.developer_board),
-      activeIcon: Icon(Icons.developer_board),
+    MainTabBarItem(
+      icon: const Icon(Icons.developer_board),
+      activeIcon: const Icon(Icons.developer_board),
       label: "项目",
-      routerPath: '/project',
+      goRouteData: () => const ProjectRouteData(),
     ),
-    const MainTabBarItem(
-      icon: Icon(Icons.list_alt),
-      activeIcon: Icon(Icons.list_alt),
+    MainTabBarItem(
+      icon: const Icon(Icons.list_alt),
+      activeIcon: const Icon(Icons.list_alt),
       label: "广场",
-      routerPath: '/square',
+      goRouteData: () => const SquareRouteData(),
     ),
-    const MainTabBarItem(
-      icon: Icon(Icons.wechat),
-      activeIcon: Icon(Icons.wechat),
+    MainTabBarItem(
+      icon: const Icon(Icons.wechat),
+      activeIcon: const Icon(Icons.wechat),
       label: "公众号",
-      routerPath: '/mediaPlatform',
+      goRouteData: () => const MediaPlatformRouteData(),
     ),
-    const MainTabBarItem(
-      icon: Icon(Icons.person),
-      activeIcon: Icon(Icons.person),
+    MainTabBarItem(
+      icon: const Icon(Icons.person),
+      activeIcon: const Icon(Icons.person),
       label: "我的",
-      routerPath: '/profile',
+      goRouteData: () => const ProfileRouteData(),
     ),
   ];
 
   void _onItemTapped(BuildContext context, int tabIndex) {
     if (tabIndex != _currentIndex) {
-      context.go(tabs[tabIndex].routerPath);
+      tabs[tabIndex].goRouteData().go(context);
     }
   }
 
@@ -64,9 +73,7 @@ class _MainTabBarState extends State<MainTabBar> {
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(child: widget.child),
-        ],
+        children: [Expanded(child: widget.child)],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -74,7 +81,7 @@ class _MainTabBarState extends State<MainTabBar> {
         onTap: (index) => _onItemTapped(context, index),
         unselectedFontSize: 10,
         selectedFontSize: 10,
-        type: BottomNavigationBarType.fixed,
+        type: .fixed,
         selectedItemColor: const Color(0xFF3C3A35),
       ),
     );
@@ -82,11 +89,12 @@ class _MainTabBarState extends State<MainTabBar> {
 }
 
 class MainTabBarItem extends BottomNavigationBarItem {
-  const MainTabBarItem(
-      {required this.routerPath,
-      required super.icon,
-      required Widget super.activeIcon,
-      super.label});
+  const MainTabBarItem({
+    required this.goRouteData,
+    required super.icon,
+    required Widget super.activeIcon,
+    super.label,
+  });
 
-  final String routerPath;
+  final GoRouteData Function() goRouteData;
 }
