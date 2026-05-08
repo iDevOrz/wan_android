@@ -1,5 +1,11 @@
 # WanAndroid Flutter
 
+[![DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/iDevOrz/wan_android)
+![Dart & Release](https://github.com/iDevOrz/wan_android/actions/workflows/dart.yml/badge.svg?style=flat-square)
+![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=flat-square&logo=Flutter&logoColor=white)
+![Riverpod](https://img.shields.io/badge/Riverpod-%23000000.svg?style=flat-square&logo=riverpod&logoColor=white)
+![GitHub License](https://img.shields.io/github/license/iDevOrz/wan_android?style=flat-square)
+
 本项目是学习 [Code with Andrea](https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/) 推荐的 Flutter 应用架构（分层设计）的实战练习项目。主要目的是在 [玩安卓 (WanAndroid)](https://www.wanandroid.com/) 提供的公开 API 业务场景下，实践基于 Riverpod 的模块化与分层架构。
 
 此外，本项目会**激进地跟进 Flutter SDK 及核心依赖库的最新版本**（包括 Alpha/Beta 版本），旨在验证新技术和新特性的可行性与兼容性。
