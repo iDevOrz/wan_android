@@ -32,6 +32,14 @@ analyzer:
     # If you plan on using Freezed in combination with json_serializable, recent versions of json_serializable and meta may require you to disable the invalid_annotation_target warning.
     # https://github.com/rrousselGit/freezed?tab=readme-ov-file#disabling-invalid_annotation_target-warning-and-warning-in-generates-files
     invalid_annotation_target: ignore
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
   plugins:
     - custom_lint
 
