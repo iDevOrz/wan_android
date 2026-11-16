@@ -7,9 +7,19 @@ on:
   pull_request:
     branches: [ "main" ]
 
+# 最小权限：release job 单独申请 contents: write
+permissions:
+  contents: read
+
+# PR 上取消旧运行；tag 发布不取消，避免中断发布
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
       - uses: actions/checkout@v4
@@ -19,9 +29,10 @@ jobs:
         with:
           flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
           channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
+          cache: true
 
       - name: Install dependencies
-        run: dart pub get
+        run: flutter pub get
 
       - name: Run build_runner
         run: dart run build_runner build --delete-conflicting-outputs
@@ -34,8 +45,11 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     if: startsWith(github.ref, 'refs/tags/')
     needs: build
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -45,9 +59,10 @@ jobs:
         with:
           flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
           channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
+          cache: true
 
       - name: Install dependencies
-        run: dart pub get
+        run: flutter pub get
 
       - name: Build APK
         run: flutter build apk --release

@@ -1,0 +1,121 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+
+  extends: [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":timezone(Asia/Shanghai)",
+  ],
+
+  timezone: "Asia/Shanghai",
+  // 每天凌晨执行一次；GitHub Actions 的 cron 使用 UTC（18:00 UTC = 02:00 CST）
+  schedule: ["before 6am"],
+
+  labels: ["dependencies"],
+  rangeStrategy: "bump",
+  rebaseWhen: "conflicted",
+
+  // 新版本发布后观察 3 天再创建 PR，降低供应链风险
+  minimumReleaseAge: "3 days",
+
+  // 限制同时打开的 PR 数量，避免依赖升级淹没其他工作；
+  // 不限制每小时创建数，否则每天只运行一次时处理速度会太慢
+  prConcurrentLimit: 6,
+  prHourlyLimit: 0,
+  branchConcurrentLimit: 10,
+
+  // 只创建 PR，不自动合并；所有更新由维护者 review 后手动合并
+  automerge: false,
+  platformAutomerge: false,
+
+  lockFileMaintenance: {
+    enabled: true,
+    schedule: ["before 5am on monday"],
+  },
+
+  vulnerabilityAlerts: {
+    enabled: true,
+    labels: ["security"],
+    schedule: ["at any time"],
+  },
+  osvVulnerabilityAlerts: true,
+  dependencyDashboardOSVVulnerabilitySummary: "all",
+
+  // 忽略构建产物和本地缓存，避免扫描到重复或无效的依赖文件
+  ignorePaths: [
+    "**/node_modules/**",
+    "**/.dart_tool/**",
+    "**/.fvm/**",
+    "**/build/**",
+    "**/.gradle/**",
+    "**/Pods/**",
+    "**/Flutter/ephemeral/**",
+  ],
+
+  packageRules: [
+    {
+      description: "Flutter SDK（FVM）：创建独立 PR，人工验证",
+      matchManagers: ["fvm"],
+      matchDepNames: ["flutter"],
+      groupName: "Flutter SDK",
+      addLabels: ["flutter-sdk"],
+    },
+    {
+      description: "Dart SDK 约束需要与 Flutter SDK 匹配，交给人工随 Flutter 升级调整",
+      matchManagers: ["pub"],
+      matchDepNames: ["dart"],
+      enabled: false,
+    },
+    {
+      description: "非主版本的开发依赖合并为一个 PR，由维护者人工合并",
+      matchDepTypes: ["dev_dependencies"],
+      matchUpdateTypes: ["minor", "patch", "pin"],
+      groupName: "开发依赖（minor/patch）",
+    },
+    {
+      description: "运行时依赖的补丁更新合并为一个 PR，由维护者人工合并",
+      matchDepTypes: ["dependencies"],
+      matchUpdateTypes: ["patch", "pin"],
+      groupName: "运行时依赖（patch）",
+    },
+    {
+      description: "非主版本 GitHub Actions 更新合并为一个 PR，保持 workflow 安全补丁及时",
+      matchManagers: ["github-actions"],
+      matchUpdateTypes: ["minor", "patch", "pin", "digest"],
+      groupName: "GitHub Actions",
+    },
+    {
+      description: "Sentry 相关包版本耦合，统一升级并人工验证",
+      matchDepNames: ["sentry_flutter", "sentry_dio", "sentry_dart_plugin"],
+      groupName: "Sentry SDK",
+      automerge: false,
+      addLabels: ["sentry"],
+    },
+    {
+      description: "Riverpod 相关包版本耦合，且 dependency_overrides 需要同步，统一人工验证",
+      matchDepNames: [
+        "flutter_riverpod",
+        "riverpod_annotation",
+        "riverpod_generator",
+        "riverpod_lint",
+      ],
+      groupName: "Riverpod",
+      automerge: false,
+      addLabels: ["riverpod"],
+    },
+    {
+      description: "Android Gradle / AGP / Kotlin 工具链：集中到一个 PR，人工验证",
+      matchManagers: ["gradle", "gradle-wrapper"],
+      groupName: "Android Gradle 工具链",
+      automerge: false,
+      addLabels: ["android"],
+    },
+    {
+      description: "所有主版本升级：创建独立 PR，必须人工审查",
+      matchUpdateTypes: ["major"],
+      automerge: false,
+      addLabels: ["major-update"],
+    },
+  ],
+}
