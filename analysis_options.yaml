@@ -40,8 +40,10 @@ analyzer:
     - windows/**
     - macos/**
     - linux/**
-  plugins:
-    - custom_lint
+
+# riverpod_lint 3.1+ 使用新版 analyzer plugin API，直接由 dart analyze 加载
+plugins:
+  riverpod_lint: ^3.1.3
 
 
 
