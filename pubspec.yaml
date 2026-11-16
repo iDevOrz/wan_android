@@ -45,7 +45,7 @@ dependencies:
   dio_cookie_manager: ^3.3.0
   cookie_jar: ^4.0.8
   path_provider: ^2.1.5
-  talker_flutter: ^5.0.2
+  talker_flutter: ^5.2.0
   easy_refresh: ^3.4.0
   webview_flutter: ^4.13.0
   integration_test:
