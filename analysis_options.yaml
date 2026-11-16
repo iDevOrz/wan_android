@@ -32,8 +32,18 @@ analyzer:
     # If you plan on using Freezed in combination with json_serializable, recent versions of json_serializable and meta may require you to disable the invalid_annotation_target warning.
     # https://github.com/rrousselGit/freezed?tab=readme-ov-file#disabling-invalid_annotation_target-warning-and-warning-in-generates-files
     invalid_annotation_target: ignore
-  plugins:
-    - custom_lint
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
+
+# riverpod_lint 3.1+ 使用新版 analyzer plugin API，直接由 dart analyze 加载
+plugins:
+  riverpod_lint: ^3.1.3
 
 
 

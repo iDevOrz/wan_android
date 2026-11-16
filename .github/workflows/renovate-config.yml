@@ -1,0 +1,39 @@
+name: Renovate Config
+
+on:
+  pull_request:
+    paths:
+      - "renovate.json5"
+      - ".github/workflows/renovate.yml"
+      - ".github/workflows/renovate-config.yml"
+  push:
+    branches: ["main"]
+    paths:
+      - "renovate.json5"
+      - ".github/workflows/renovate.yml"
+      - ".github/workflows/renovate-config.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: renovate-config-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate config
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Validate renovate.json5
+        run: npx --yes --package renovate@44 renovate-config-validator renovate.json5

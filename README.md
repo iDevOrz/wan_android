@@ -2,6 +2,7 @@
 
 [![DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/iDevOrz/wan_android)
 ![Dart & Release](https://github.com/iDevOrz/wan_android/actions/workflows/dart.yml/badge.svg?style=flat-square)
+[![Renovate enabled](https://img.shields.io/badge/Renovate-enabled-1A1F6C?logo=renovatebot&style=flat-square)](docs/dependency-updates.md)
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=flat-square&logo=Flutter&logoColor=white)
 ![Riverpod](https://img.shields.io/badge/Riverpod-%23000000.svg?style=flat-square&logo=riverpod&logoColor=white)
 ![GitHub License](https://img.shields.io/github/license/iDevOrz/wan_android?style=flat-square)
@@ -18,6 +19,7 @@
 - **类型安全路由**：基于 **GoRouter** 配合 `go_router_builder` 实现声明式路由。
 - **完善的网络层**：基于 **Dio** 封装，支持 Cookie 持久化及拦截器。
 - **交互体验**：内置下拉刷新（EasyRefresh）、日志监控（Talker）以及沉浸式 WebView。
+- **依赖自动化**：Renovate 每日检查 Flutter/Dart、Android Gradle 和 GitHub Actions 更新，创建 PR 后由维护者人工审查合并。
 
 ## 🛠️ 技术栈
 
@@ -113,6 +115,17 @@ graph TD
    ```bash
    fvm flutter run
    ```
+
+## 🤖 依赖更新
+
+项目使用 Renovate 自动检查依赖更新，并通过 GitHub Actions 做验证：
+
+- 每天自动扫描 `pubspec.yaml`、`.fvmrc`、Android Gradle 和 GitHub Actions。
+- 按更新类型分组创建 PR；所有更新都由维护者 review 后手动合并，不会自动合并。
+- Flutter SDK、主版本升级和 Android 工具链需要人工审查。
+- 所有待处理更新汇总在仓库的 **Dependency Dashboard** issue 中。
+
+完整的 Token 配置、分支保护和运行方式见 [docs/dependency-updates.md](docs/dependency-updates.md)。
 
 ## 📌 TODO
 
